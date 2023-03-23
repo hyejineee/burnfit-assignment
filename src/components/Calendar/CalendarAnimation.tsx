@@ -4,9 +4,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {debounce} from 'lodash';
 
-import {ReactNode, useEffect, useReducer, useRef} from 'react';
+import {ReactNode} from 'react';
 import {LayoutChangeEvent, StyleSheet, View} from 'react-native';
 import {useSetMonthlyMode} from './CalendarContext';
 
@@ -81,13 +80,13 @@ export default function CalendarAnimation({
       }
 
       // swipe right
-      if (absolute.value.x < e.absoluteX) {
+      if (absolute.value.x + 100 < e.absoluteX) {
         direction.value = 'r';
         return;
       }
 
       // swipe left
-      if (absolute.value.x > e.absoluteX) {
+      if (absolute.value.x - 100 > e.absoluteX) {
         direction.value = 'l';
         return;
       }
@@ -99,6 +98,7 @@ export default function CalendarAnimation({
       switch (direction.value) {
         case 'r': {
           onSwipeRight();
+
           break;
         }
         case 'l': {
@@ -108,6 +108,7 @@ export default function CalendarAnimation({
         default: {
         }
       }
+      direction.value = '';
     });
 
   const onLayout = (e: LayoutChangeEvent) => {
