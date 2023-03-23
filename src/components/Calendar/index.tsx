@@ -1,18 +1,27 @@
+import moment from 'moment';
 import styled from 'styled-components/native';
-import {CalendarProvider} from './CalendarContext';
+import {CalendarProvider, useCurrentMonth} from './CalendarContext';
 import Head from './Head';
 import Month from './Month';
 
-export default function Calerdar() {
+function Calerdar() {
+  const current = moment(useCurrentMonth());
   return (
-    <CalendarProvider>
-      <Wrapper>
-        <Head />
-        <Month />
-      </Wrapper>
-    </CalendarProvider>
+    <Wrapper>
+      <Head />
+      <Month currentYear={current.year()} currentMonth={current.month()} />
+    </Wrapper>
   );
 }
+
+const ProviderWrapper = () => {
+  return (
+    <CalendarProvider>
+      <Calerdar />
+    </CalendarProvider>
+  );
+};
+export default ProviderWrapper;
 
 const Wrapper = styled.View`
   width: auto;
