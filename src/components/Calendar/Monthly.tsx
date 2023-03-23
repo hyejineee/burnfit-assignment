@@ -1,14 +1,14 @@
 import moment from 'moment';
 import styled from 'styled-components/native';
-import {useCurrentMonth} from './CalendarContext';
+import {useCurrentViewDate} from './CalendarContext';
 import Week from './Week';
 
-export default function Month() {
-  const current = moment(useCurrentMonth());
+export default function Monthly() {
+  const currentViewDate = moment(useCurrentViewDate());
 
   const prevMonthLastSunday = moment()
-    .year(current.year())
-    .month(current.month())
+    .year(currentViewDate.year())
+    .month(currentViewDate.month())
     .subtract(1, 'months')
     .endOf('month')
     .day('Sunday');
@@ -25,8 +25,12 @@ export default function Month() {
     <Wrapper>
       {weeks.map(
         startDate =>
-          startDate.getMonth() > current.month() || (
-            <Week currentMonth={current.month()} startDate={startDate} />
+          currentViewDate.isBefore(moment(startDate), 'month') || (
+            <Week
+              isMonthlyMode={true}
+              currentMonth={currentViewDate.month()}
+              startDate={startDate}
+            />
           ),
       )}
     </Wrapper>
@@ -36,4 +40,6 @@ export default function Month() {
 const Wrapper = styled.View`
   width: auto;
   height: auto;
+  align-items: center;
+  justify-content: center;
 `;

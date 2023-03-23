@@ -40,10 +40,10 @@ const Date = styled.Text<StyleProps>`
 `;
 
 const TodayDot = styled.View`
-  width: 5;
-  height: 5;
-  border-radius: 2.5;
-  margin-top: 5;
-  margin-bottom: 3;
+  width: 5px;
+  height: 5px;
+  border-radius: 2.5px;
+  margin-top: 5px;
+  margin-bottom: 3px;
   background-color: gray;
 `;
