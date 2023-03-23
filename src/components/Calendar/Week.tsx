@@ -6,8 +6,13 @@ import Day from './Day';
 type Props = {
   currentMonth: number;
   startDate: Date;
+  isMonthlyMode: boolean;
 };
-export default function Week({currentMonth, startDate}: Props) {
+export default function Week({
+  isMonthlyMode = true,
+  currentMonth,
+  startDate,
+}: Props) {
   const selected = useSelectedDate();
   const selectDate = useSelectDate();
 
@@ -25,8 +30,8 @@ export default function Week({currentMonth, startDate}: Props) {
         <PressableWrapper onPress={handlePressDay(date)}>
           <Day
             date={date}
-            disable={date.getMonth() !== currentMonth}
-            selected={moment(date).isSame(moment(selected))}
+            disable={isMonthlyMode ? date.getMonth() !== currentMonth : false}
+            selected={moment(date).isSame(moment(selected), 'day')}
           />
         </PressableWrapper>
       ))}

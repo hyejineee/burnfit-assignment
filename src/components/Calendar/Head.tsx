@@ -2,32 +2,34 @@ import moment from 'moment';
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styled from 'styled-components/native';
-import {useCurrentMonth, useSetCurrentMonth} from './CalendarContext';
+import {useCurrentViewDate} from './CalendarContext';
 
-export default function Head() {
-  const current = useCurrentMonth();
-  const setCurrent = useSetCurrentMonth();
-
-  const handlePressPrevMonth = () => {
-    setCurrent(moment(current).subtract(1, 'month').toDate());
+type Props = {
+  onPressPrev: () => void;
+  onPressNext: () => void;
+};
+export default function Head({onPressPrev, onPressNext}: Props) {
+  const current = moment(useCurrentViewDate());
+  const handlePressPrev = () => {
+    onPressPrev();
   };
 
-  const handlePressNextMonth = () => {
-    setCurrent(moment(current).add(1, 'month').toDate());
+  const handlePressNext = () => {
+    onPressNext();
   };
 
   return (
     <Wrapper>
       <ControlWrapper>
-        <ArrowIconButton onPress={handlePressPrevMonth}>
+        <ArrowIconButton onPress={handlePressPrev}>
           <Icon name="arrow-back-circle-outline" size={24} color="#0080ff" />
         </ArrowIconButton>
 
-        <Text style={textStyles.currentMonth}>{`${moment(current).format(
+        <Text style={textStyles.currentMonth}>{`${current.format(
           'MMMM',
-        )}, ${moment(current).year()}`}</Text>
+        )}, ${current.year()}`}</Text>
 
-        <ArrowIconButton onPress={handlePressNextMonth}>
+        <ArrowIconButton onPress={handlePressNext}>
           <Icon name="arrow-forward-circle-outline" size={24} color="#0080ff" />
         </ArrowIconButton>
       </ControlWrapper>
