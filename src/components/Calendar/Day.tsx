@@ -9,7 +9,7 @@ type Props = {
 
 export default function Day({date, disable = false, selected = false}: Props) {
   const day = moment(date).date();
-  const isToday = moment().isSame(moment(date));
+  const isToday = moment().isSame(moment(date), 'day');
 
   return (
     <Wrapper selected={selected}>
@@ -25,10 +25,11 @@ type StyleProps = {
 };
 
 const Wrapper = styled.View<StyleProps>`
-  width: 100%;
+  flex: 1;
+  aspect-ratio: 1;
   align-items: center;
   justify-content: center;
-
+  margin: 3px;
   border-radius: ${props => (props.selected ? 1000 : 0)};
   border-width: ${props => (props.selected ? 1 : 0)};
   border-color: ${props => (props.selected ? 'red' : '')};
