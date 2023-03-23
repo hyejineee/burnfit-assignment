@@ -1,11 +1,14 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import {screenStyle} from './common.styles';
+import styled from 'styled-components/native';
+import Calerdar from '../components/Calendar';
 
 export default function CalendarScreen() {
   return (
-    <View style={screenStyle.container}>
-      <Text>Calendar</Text>
-    </View>
+    <Wrapper>
+      <Calerdar />
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.SafeAreaView`
+  flex: 1;
+`;
