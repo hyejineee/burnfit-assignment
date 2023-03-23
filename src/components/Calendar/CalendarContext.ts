@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import constate from 'constate';
 import moment from 'moment';
 import {useEffect, useState} from 'react';

@@ -1,5 +1,7 @@
 import moment from 'moment';
+
 import styled from 'styled-components/native';
+import CalendarAnimation from './CalendarAnimation';
 import {
   CalendarProvider,
   useCurrentViewDate,
@@ -39,7 +41,19 @@ function Calerdar() {
         onPressNext={isMonthlyMode ? handlePressNextMonth : handlePressNextWeek}
       />
 
-      <DatesWrapper>{isMonthlyMode ? <Monthly /> : <Weekly />}</DatesWrapper>
+      <CalendarAnimation
+        onSwipeLeft={isMonthlyMode ? handlePressNextMonth : handlePressNextWeek}
+        onSwipeRight={
+          isMonthlyMode ? handlePressPrevMonth : handlePressPreWeek
+        }>
+        <DatesWrapper>
+          <Monthly />
+        </DatesWrapper>
+
+        <DatesWrapper>
+          <Weekly />
+        </DatesWrapper>
+      </CalendarAnimation>
     </Wrapper>
   );
 }
