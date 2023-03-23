@@ -1,15 +1,14 @@
 import moment from 'moment';
-import {View} from 'react-native';
+import styled from 'styled-components/native';
+import {useCurrentMonth} from './CalendarContext';
 import Week from './Week';
 
-type Props = {
-  currentYear: number;
-  currentMonth: number;
-};
-export default function Month({currentYear, currentMonth}: Props) {
+export default function Month() {
+  const current = moment(useCurrentMonth());
+
   const prevMonthLastSunday = moment()
-    .year(currentYear)
-    .month(currentMonth)
+    .year(current.year())
+    .month(current.month())
     .subtract(1, 'months')
     .endOf('month')
     .day('Sunday');
@@ -23,13 +22,18 @@ export default function Month({currentYear, currentMonth}: Props) {
     );
 
   return (
-    <View>
+    <Wrapper>
       {weeks.map(
         startDate =>
-          startDate.getMonth() > currentMonth || (
-            <Week currentMonth={currentMonth} startDate={startDate} />
+          startDate.getMonth() > current.month() || (
+            <Week currentMonth={current.month()} startDate={startDate} />
           ),
       )}
-    </View>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.View`
+  width: auto;
+  height: auto;
+`;

@@ -1,19 +1,16 @@
-import moment from 'moment';
+import {Text} from 'react-native';
 import styled from 'styled-components/native';
-import {Text, View} from 'react-native';
-import Day from '../components/Calendar/Day';
+import Calerdar from '../components/Calendar';
 
 export default function CalendarScreen() {
   return (
     <Wrapper>
       <Text>Calendar</Text>
-      <Day date={moment().toDate()} />
-      <Text>Calendar</Text>
+      <Calerdar />
     </Wrapper>
   );
 }
 
-const Wrapper = styled.View`
+const Wrapper = styled.SafeAreaView`
   flex: 1;
-  flex-direction: column;
 `;

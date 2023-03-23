@@ -32,7 +32,7 @@ const Wrapper = styled.View<StyleProps>`
   margin: 3px;
   border-radius: ${props => (props.selected ? 1000 : 0)};
   border-width: ${props => (props.selected ? 1 : 0)};
-  border-color: ${props => (props.selected ? 'red' : '')};
+  border-color: ${props => (props.selected ? '#0080ff' : '')};
 `;
 
 const Date = styled.Text<StyleProps>`
